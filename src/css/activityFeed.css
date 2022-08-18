@@ -1,0 +1,25 @@
+.activity_container {
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.activity_item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.2rem;
+  background-color: #a2aaa2;
+  height: 35px;
+  padding: 0.8rem;
+  border-radius: 20px;
+}
+
+.activity_icon {
+  display: flex;
+}
