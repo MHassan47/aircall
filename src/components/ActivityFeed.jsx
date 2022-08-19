@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../css/activityFeed.css";
 import {
   BsFillTelephoneInboundFill,
@@ -7,6 +7,14 @@ import {
 import { RiArchiveFill, RiInformationFill } from "react-icons/ri";
 
 function ActivityFeed({ data }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const archiveClickHandler = () => {
+    console.log("clicked archive");
+  };
+  const infoClickHandler = () => {
+    console.log("clicked info");
+  };
+
   return (
     <div className="activity_container">
       {data.map((call) => (
@@ -27,8 +35,8 @@ function ActivityFeed({ data }) {
               })}
             </h2>
             <div className="options_icons">
-              <RiArchiveFill />
-              <RiInformationFill />
+              <RiArchiveFill onClick={archiveClickHandler} />
+              <RiInformationFill onClick={() => setIsOpen(true)} />
             </div>
           </div>
         </div>

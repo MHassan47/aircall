@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import ActivityFeed from "./components/ActivityFeed.jsx";
-import useFetch from "./hooks/useFetch.js";
+
 import { useState } from "react";
 import Header from "./Header.jsx";
 import axios from "axios";
