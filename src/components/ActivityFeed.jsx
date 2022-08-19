@@ -18,11 +18,17 @@ function ActivityFeed({ data }) {
     setCallID(callID);
   };
 
+  const onClose = () => {
+    setIsOpen(false);
+  };
+
   console.log(isOpen);
   console.log(callID);
   return (
     <div className="activity_container">
-      {isOpen && <CallInfoModal callID={callID} open={isOpen} />}
+      {isOpen && (
+        <CallInfoModal callID={callID} open={isOpen} onClose={onClose} />
+      )}
       {data.map((call) => (
         <div className="activity_item" key={call.id}>
           <div className="activity_icon">
