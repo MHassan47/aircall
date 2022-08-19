@@ -6,6 +6,7 @@ import { useState } from "react";
 import Header from "./Header.jsx";
 import axios from "axios";
 import Footer from "./components/Footer.jsx";
+import SelectionMenu from "./components/SelectionMenu.jsx";
 
 const App = () => {
   // const { data, loading, error } = useFetch("/activities");
@@ -25,6 +26,7 @@ const App = () => {
   return (
     <div className="container">
       <Header />
+      <SelectionMenu />
       <div className="container-view">
         {loading ? "loading" : <ActivityFeed data={data} />}
       </div>
