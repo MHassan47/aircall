@@ -9,26 +9,38 @@ import Footer from "./components/Footer.jsx";
 import SelectionMenu from "./components/SelectionMenu.jsx";
 
 const App = () => {
-  // const { data, loading, error } = useFetch("/activities");
-
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [archive, setArchive] = useState(false);
+  const [archiveCall, setArchiveCall] = useState(false);
+  const [isCallArchived, setIsCallArchived] = useState(false);
   const url = "https://aircall-job.herokuapp.com/activities";
+
   useEffect(() => {
     setLoading(true);
     axios
       .get(url)
       .then((results) => setData(results.data))
+
       .catch((error) => console.log(error));
     setLoading(false);
-  }, []);
+  }, [isCallArchived]);
+
   console.log(data);
   return (
     <div className="container">
       <Header />
-      <SelectionMenu />
+      <SelectionMenu archive={archive} setArchive={setArchive} />
       <div className="container-view">
-        {loading ? "loading" : <ActivityFeed data={data} />}
+        {loading ? (
+          <div>loading</div>
+        ) : (
+          <ActivityFeed
+            data={data}
+            archive={archive}
+            setIsCallArchived={setIsCallArchived}
+          />
+        )}
       </div>
       <Footer />
     </div>
