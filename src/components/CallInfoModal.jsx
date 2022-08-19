@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import "../css/callInfoModal.css";
+import { HiUserCircle } from "react-icons/hi";
 
 function CallInfoModal({ callID, open }) {
   const [loading, setLoading] = useState(false);
@@ -18,7 +19,21 @@ function CallInfoModal({ callID, open }) {
     <div className="overlay">
       <div className="modal_container">
         <div className="close_btn">X</div>
-        <div>{data.duration}</div>
+        <div className="caller_info">
+          <div className="caller_icon">
+            <HiUserCircle />
+          </div>
+          {data.from} <br /> {data.via}
+        </div>
+        <div className="call_info">
+          {data.to} {data.call_type} call at <br />
+          {new Date(data.created_at).toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          })}{" "}
+          on {new Date(data.created_at).toDateString()}{" "}
+        </div>
+        <div>Call Duration: {data.duration} seconds</div>
       </div>
     </div>
   );
