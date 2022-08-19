@@ -1,8 +1,7 @@
 .footer_icons {
-  border-top: 2px solid grey;
-
-  margin: 0.5rem;
   display: flex;
+  border-top: 2px solid grey;
+  margin: 0.5rem;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
