@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import "../css/callInfoModal.css";
 import { HiUserCircle } from "react-icons/hi";
 
-function CallInfoModal({ callID, open }) {
+function CallInfoModal({ callID, onClose }) {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -18,7 +18,9 @@ function CallInfoModal({ callID, open }) {
   return (
     <div className="overlay">
       <div className="modal_container">
-        <div className="close_btn">X</div>
+        <div className="close_btn" onClick={onClose}>
+          X
+        </div>
         <div className="caller_info">
           <div className="caller_icon">
             <HiUserCircle />
