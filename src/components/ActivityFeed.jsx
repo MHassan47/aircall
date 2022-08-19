@@ -5,18 +5,24 @@ import {
   BsFillTelephoneOutboundFill,
 } from "react-icons/bs";
 import { RiArchiveFill, RiInformationFill } from "react-icons/ri";
+import CallInfoModal from "./CallInfoModal.jsx";
 
 function ActivityFeed({ data }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [callID, setCallID] = useState();
   const archiveClickHandler = () => {
     console.log("clicked archive");
   };
-  const infoClickHandler = () => {
-    console.log("clicked info");
+  const infoClickHandler = (callID) => {
+    setIsOpen(true);
+    setCallID(callID);
   };
 
+  console.log(isOpen);
+  console.log(callID);
   return (
     <div className="activity_container">
+      {isOpen && <CallInfoModal callID={callID} open={isOpen} />}
       {data.map((call) => (
         <div className="activity_item" key={call.id}>
           <div className="activity_icon">
@@ -36,7 +42,7 @@ function ActivityFeed({ data }) {
             </h2>
             <div className="options_icons">
               <RiArchiveFill onClick={archiveClickHandler} />
-              <RiInformationFill onClick={() => setIsOpen(true)} />
+              <RiInformationFill onClick={() => infoClickHandler(call.id)} />
             </div>
           </div>
         </div>
