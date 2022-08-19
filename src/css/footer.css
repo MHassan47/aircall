@@ -1,0 +1,22 @@
+.footer_icons {
+  border-top: 2px solid grey;
+
+  margin: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 2rem;
+}
+
+.center_icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.8rem;
+  background-color: #a2aaa2;
+  padding: 0.8rem;
+  border-radius: 50%;
+  z-index: 100;
+  margin-top: -1.5rem;
+}
