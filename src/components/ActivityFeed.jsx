@@ -4,6 +4,8 @@ import {
   BsFillTelephoneInboundFill,
   BsFillTelephoneOutboundFill,
 } from "react-icons/bs";
+import { RiArchiveFill, RiInformationFill } from "react-icons/ri";
+
 function ActivityFeed({ data }) {
   return (
     <div className="activity_container">
@@ -17,13 +19,18 @@ function ActivityFeed({ data }) {
             )}
             <h1 className="activity_caller">{call.from}</h1>
           </div>
-
-          <h2 className="activity_called_at">
-            {new Date(call.created_at).toLocaleTimeString([], {
-              hour: "2-digit",
-              minute: "2-digit",
-            })}
-          </h2>
+          <div className="activity_right">
+            <h2 className="activity_called_at">
+              {new Date(call.created_at).toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+            </h2>
+            <div className="options_icons">
+              <RiArchiveFill />
+              <RiInformationFill />
+            </div>
+          </div>
         </div>
       ))}
     </div>
