@@ -12,8 +12,8 @@ const App = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [archive, setArchive] = useState(false);
-  const [archiveCall, setArchiveCall] = useState(false);
   const [isCallArchived, setIsCallArchived] = useState(false);
+
   const url = "https://aircall-job.herokuapp.com/activities";
 
   useEffect(() => {
