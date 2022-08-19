@@ -5,6 +5,7 @@ import ActivityFeed from "./components/ActivityFeed.jsx";
 import { useState } from "react";
 import Header from "./Header.jsx";
 import axios from "axios";
+import Footer from "./components/Footer.jsx";
 
 const App = () => {
   // const { data, loading, error } = useFetch("/activities");
@@ -27,6 +28,7 @@ const App = () => {
       <div className="container-view">
         {loading ? "loading" : <ActivityFeed data={data} />}
       </div>
+      <Footer />
     </div>
   );
 };
