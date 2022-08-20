@@ -46,6 +46,13 @@ function ActivityFeed({ data, archive, setIsCallArchived }) {
     setIsOpen(false);
   };
 
+  // const checkDate = (index) => {
+  //   const callDate = new Date(data[index].created_at).toDateString();
+  //   const prevCallDate = new Date(data[index - 1].created_at).toDateString();
+  //   if (callDate === prevCallDate) {
+  //     return false;
+  //   } else return false;
+  // };
   return (
     <div className="activity_container">
       {isOpen && (
@@ -54,38 +61,43 @@ function ActivityFeed({ data, archive, setIsCallArchived }) {
 
       {data
         .filter((item) => item.is_archived === archive)
-        .map((call) => {
-          // if (!call.is_archived)
+        .map((call, index) => {
           return (
-            <div className="activity_item" key={call.id}>
-              <div className="activity_icon">
-                {call.direction === "inbound" ? (
-                  <BsFillTelephoneInboundFill />
-                ) : (
-                  <BsFillTelephoneOutboundFill />
-                )}
-                <h1 className="activity_caller">{call.from}</h1>
+            <div key={call.id}>
+              <div className="activity_date">
+                {new Date(call.created_at).toDateString()}
               </div>
-              <div className="activity_right">
-                <h2 className="activity_called_at">
-                  {new Date(call.created_at).toLocaleTimeString([], {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })}
-                </h2>
-                <div className="options_icons">
-                  {archive ? (
-                    <TiArrowBack
-                      onClick={() => undoarchiveClickHandler(call.id)}
-                    />
+
+              <div className="activity_item">
+                <div className="activity_icon">
+                  {call.direction === "inbound" ? (
+                    <BsFillTelephoneInboundFill />
                   ) : (
-                    <RiArchiveFill
-                      onClick={() => archiveClickHandler(call.id)}
-                    />
+                    <BsFillTelephoneOutboundFill />
                   )}
-                  <RiInformationFill
-                    onClick={() => infoClickHandler(call.id)}
-                  />
+                  <h1 className="activity_caller">{call.from}</h1>
+                </div>
+                <div className="activity_right">
+                  <h2 className="activity_called_at">
+                    {new Date(call.created_at).toLocaleTimeString([], {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </h2>
+                  <div className="options_icons">
+                    {archive ? (
+                      <TiArrowBack
+                        onClick={() => undoarchiveClickHandler(call.id)}
+                      />
+                    ) : (
+                      <RiArchiveFill
+                        onClick={() => archiveClickHandler(call.id)}
+                      />
+                    )}
+                    <RiInformationFill
+                      onClick={() => infoClickHandler(call.id)}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
