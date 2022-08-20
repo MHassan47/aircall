@@ -8,11 +8,17 @@ import { RiArchiveFill, RiInformationFill } from "react-icons/ri";
 import { TiArrowBack } from "react-icons/ti";
 import CallInfoModal from "./CallInfoModal.jsx";
 import axios from "axios";
+import { useTransition, animated } from "react-spring";
 
 function ActivityFeed({ data, archive, setIsCallArchived }) {
   const [isOpen, setIsOpen] = useState(false);
   const [callID, setCallID] = useState();
 
+  const transition = useTransition(archive, {
+    from: { x: -100, y: 800, opacity: 0 },
+    enter: { x: 0, y: 0, opacity: 1 },
+    leave: { x: -100, y: 800, opacity: 0 },
+  });
   const archiveClickHandler = (callID) => {
     setIsCallArchived(true);
 
@@ -61,7 +67,7 @@ function ActivityFeed({ data, archive, setIsCallArchived }) {
   const filteredData = data.filter((item) => item.is_archived === archive);
 
   return (
-    <div className="activity_container">
+    <animated.div className="activity_container">
       {isOpen && (
         <CallInfoModal callID={callID} open={isOpen} onClose={onClose} />
       )}{" "}
@@ -118,7 +124,7 @@ function ActivityFeed({ data, archive, setIsCallArchived }) {
           })}
         </div>
       )}
-    </div>
+    </animated.div>
   );
 }
 
