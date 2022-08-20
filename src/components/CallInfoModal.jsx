@@ -7,6 +7,8 @@ import { HiUserCircle } from "react-icons/hi";
 function CallInfoModal({ callID, onClose }) {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
+
+  // GET detailed info of specific call item from API
   useEffect(() => {
     setLoading(true);
     axios

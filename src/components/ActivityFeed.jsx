@@ -13,9 +13,9 @@ function ActivityFeed({ data, archive, setIsCallArchived }) {
   const [isOpen, setIsOpen] = useState(false);
   const [callID, setCallID] = useState();
 
+  // Handles POST to API to update call item status to archived
   const archiveClickHandler = (callID) => {
     setIsCallArchived(true);
-
     axios
       .post(`https://aircall-job.herokuapp.com/activities/${callID}`, {
         is_archived: true,
@@ -25,14 +25,13 @@ function ActivityFeed({ data, archive, setIsCallArchived }) {
       .catch((error) => console.log(error));
   };
 
-  const undoarchiveClickHandler = (callID) => {
+  // Handles POST to API to update call item status to NOT archived
+  const undoArchiveClickHandler = (callID) => {
     setIsCallArchived(true);
-
     axios
       .post(`https://aircall-job.herokuapp.com/activities/${callID}`, {
         is_archived: false,
       })
-
       .then(() => setIsCallArchived(false))
       .catch((error) => console.log(error));
   };
@@ -46,6 +45,7 @@ function ActivityFeed({ data, archive, setIsCallArchived }) {
     setIsOpen(false);
   };
 
+  // Logic to group calls based on date stamp
   const checkDate = (index) => {
     if (index > 0) {
       const currentCallDate = new Date(data[index].created_at).toDateString();
@@ -58,23 +58,27 @@ function ActivityFeed({ data, archive, setIsCallArchived }) {
     return false;
   };
 
+  // Filters data based on archive state
   const filteredData = data.filter((item) => item.is_archived === archive);
 
   return (
     <div className="activity_container">
       {isOpen && (
         <CallInfoModal callID={callID} open={isOpen} onClose={onClose} />
-      )}{" "}
+      )}
+      {/* Conditionally renders to notify empty container */}
       {filteredData.length <= 0 ? (
         <div className="empty">
           {archive ? "No Archives Found" : "No Calls Found"}
         </div>
       ) : (
         <div>
+          {/* Map through filtered data to render each call item */}
           {filteredData.map((call, index) => {
             return (
               <div key={call.id}>
                 <div>
+                  {/* Conditonally renders date stamp when unique new date is rendered */}
                   {!checkDate(index) && (
                     <div className="activity_date">
                       {new Date(call.created_at).toDateString()}
@@ -99,7 +103,7 @@ function ActivityFeed({ data, archive, setIsCallArchived }) {
                       <div className="options_icons">
                         {archive ? (
                           <TiArrowBack
-                            onClick={() => undoarchiveClickHandler(call.id)}
+                            onClick={() => undoArchiveClickHandler(call.id)}
                           />
                         ) : (
                           <TiArrowForward

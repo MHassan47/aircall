@@ -12,6 +12,7 @@ function SelectionMenu({ archive, setArchive }) {
       >
         All Calls
       </div>
+
       <div
         className="archived_calls"
         id={archive ? "selected" : null}

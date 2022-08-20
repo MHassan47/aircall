@@ -17,6 +17,7 @@ const App = () => {
 
   const url = "https://aircall-job.herokuapp.com/activities";
 
+  // GET all data from API upon load or POST
   useEffect(() => {
     setLoading(true);
 
