@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../css/activityFeed.css";
 import {
   BsFillTelephoneInboundFill,
   BsFillTelephoneOutboundFill,
 } from "react-icons/bs";
-import { RiArchiveFill, RiInformationFill } from "react-icons/ri";
-import { TiArrowBack } from "react-icons/ti";
+import { RiInformationFill } from "react-icons/ri";
+import { TiArrowBack, TiArrowForward } from "react-icons/ti";
 import CallInfoModal from "./CallInfoModal.jsx";
 import axios from "axios";
 
@@ -102,7 +102,7 @@ function ActivityFeed({ data, archive, setIsCallArchived }) {
                             onClick={() => undoarchiveClickHandler(call.id)}
                           />
                         ) : (
-                          <RiArchiveFill
+                          <TiArrowForward
                             onClick={() => archiveClickHandler(call.id)}
                           />
                         )}

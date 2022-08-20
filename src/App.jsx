@@ -29,7 +29,6 @@ const App = () => {
     setTimeout(() => setLoading(false), 700);
   }, [isCallArchived]);
 
-  console.log(data);
   return (
     <div className="container">
       <Header />
