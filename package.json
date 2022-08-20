@@ -9,7 +9,8 @@
   "private": false,
   "scripts": {
     "start": "webpack-dev-server --mode development --open",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "postinstall": "webpack -p --config ./webpack.prod.config.js --progress"
   },
   "dependencies": {
     "axios": "^0.27.2",
