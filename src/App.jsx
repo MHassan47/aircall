@@ -5,6 +5,7 @@ import ActivityFeed from "./components/ActivityFeed.jsx";
 import { useState } from "react";
 import Header from "./Header.jsx";
 import axios from "axios";
+import { ThreeDots } from "react-loader-spinner";
 import Footer from "./components/Footer.jsx";
 import SelectionMenu from "./components/SelectionMenu.jsx";
 
@@ -18,12 +19,14 @@ const App = () => {
 
   useEffect(() => {
     setLoading(true);
+
     axios
       .get(url)
       .then((results) => setData(results.data))
 
       .catch((error) => console.log(error));
-    setLoading(false);
+
+    setTimeout(() => setLoading(false), 700);
   }, [isCallArchived]);
 
   console.log(data);
@@ -33,7 +36,9 @@ const App = () => {
       <SelectionMenu archive={archive} setArchive={setArchive} />
       <div className="container-view">
         {loading ? (
-          <div>loading</div>
+          <div className="spinner">
+            <ThreeDots color="#a2aaa2" height={80} width={80} />
+          </div>
         ) : (
           <ActivityFeed
             data={data}

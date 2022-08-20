@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import "../css/callInfoModal.css";
+import { ThreeDots } from "react-loader-spinner";
 import { HiUserCircle } from "react-icons/hi";
 
 function CallInfoModal({ callID, onClose }) {
@@ -12,7 +13,7 @@ function CallInfoModal({ callID, onClose }) {
       .get(`https://aircall-job.herokuapp.com/activities/${callID}`)
       .then((results) => setData(results.data))
       .catch((error) => console.log(error));
-    setLoading(false);
+    setTimeout(() => setLoading(false), 500);
   }, []);
 
   return (
@@ -21,21 +22,30 @@ function CallInfoModal({ callID, onClose }) {
         <div className="close_btn" onClick={onClose}>
           X
         </div>
-        <div className="caller_info">
-          <div className="caller_icon">
-            <HiUserCircle />
+        {loading ? (
+          <div className="spinner">
+            <ThreeDots color="#727672" height={80} width={80} />
           </div>
-          {data.from} <br /> {data.via}
-        </div>
-        <div className="call_info">
-          {data.to} {data.call_type} call at <br />
-          {new Date(data.created_at).toLocaleTimeString([], {
-            hour: "2-digit",
-            minute: "2-digit",
-          })}{" "}
-          on {new Date(data.created_at).toDateString()}{" "}
-        </div>
-        <div>Call Duration: {data.duration} seconds</div>
+        ) : (
+          <div className="modal_content">
+            <div className="caller_info">
+              <div className="caller_icon">
+                <HiUserCircle />
+              </div>
+              {data.from} <br /> {data.via}
+            </div>
+
+            <div className="call_info">
+              {data.to} {data.call_type} call at <br />
+              {new Date(data.created_at).toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}{" "}
+              on {new Date(data.created_at).toDateString()}{" "}
+            </div>
+            <div>Call Duration: {data.duration} seconds</div>
+          </div>
+        )}
       </div>
     </div>
   );
