@@ -5,6 +5,7 @@ import {
   BsFillTelephoneOutboundFill,
 } from "react-icons/bs";
 import { RiArchiveFill, RiInformationFill } from "react-icons/ri";
+import { TiArrowBack } from "react-icons/ti";
 import CallInfoModal from "./CallInfoModal.jsx";
 import axios from "axios";
 
@@ -23,6 +24,19 @@ function ActivityFeed({ data, archive, setIsCallArchived }) {
       .then(() => setIsCallArchived(false))
       .catch((error) => console.log(error));
   };
+
+  const undoarchiveClickHandler = (callID) => {
+    setIsCallArchived(true);
+
+    axios
+      .post(`https://aircall-job.herokuapp.com/activities/${callID}`, {
+        is_archived: false,
+      })
+
+      .then(() => setIsCallArchived(false))
+      .catch((error) => console.log(error));
+  };
+
   const infoClickHandler = (callID) => {
     setIsOpen(true);
     setCallID(callID);
@@ -60,7 +74,15 @@ function ActivityFeed({ data, archive, setIsCallArchived }) {
                   })}
                 </h2>
                 <div className="options_icons">
-                  <RiArchiveFill onClick={() => archiveClickHandler(call.id)} />
+                  {archive ? (
+                    <TiArrowBack
+                      onClick={() => undoarchiveClickHandler(call.id)}
+                    />
+                  ) : (
+                    <RiArchiveFill
+                      onClick={() => archiveClickHandler(call.id)}
+                    />
+                  )}
                   <RiInformationFill
                     onClick={() => infoClickHandler(call.id)}
                   />
