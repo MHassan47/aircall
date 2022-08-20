@@ -25,6 +25,11 @@
   align-items: center;
   gap: 1rem;
 }
+.modal_content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
 .caller_info {
   display: flex;
   flex-direction: column;
